@@ -23,7 +23,7 @@
 	$conexion = mysqli_connect("localhost","root","","sistema");
 
 	if($accion) {
-			$consulta = "INSERT INTO productos VALUES ('$id','$cod','$des','$col','$med','$uni','$cos','$tol')";
+			$consulta = "INSERT INTO productos VALUES ('$id','$cod','$des','$col','$med'";
 			mysqli_query($conexion,$consulta);
 			header('Location:/Sistema/ver.php');
  }

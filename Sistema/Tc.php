@@ -12,14 +12,18 @@
 	<br></br>
 	<img src="assets/img/2.png">
 <h4><div id="Formulario1">Ingresar datos del producto</div></h4>
-	<form action="accioness.php?ac=1" method="post">
+	<form action="2.1.php" method="get">
 <p>
 		<center>
+			<label for="codigo">Codigo</label>
+			<input type="text"  name="p[]" id="codigo" placeholder="Codigo"/>
+			<br>
+			<label for="unidades">Unidades</label>
+			<input type="text"  name="p[]" id="unidades" placeholder="Unidades"/>
+			<br>
+      <label for="costo">Co
+			<input type="text"  name="p[]" id="costo" placeholder="Costo unitario en $" />
 
-			<input type="text"  name="codigo" id="codigo" size="10" maxlength="10" placeholder="Código" required />
-    	<input type="text"  name="unidades" id="unidades" size="5" maxlength="5" placeholder="Unidades" />
-     	<input type="text"  name="costo" id="costo" size="10" maxlength="10" placeholder="Costo unitario en $"  />
-			<input type="text"  name="total" id="total" size="10" maxlength="10" placeholder="Sub-total en $"  />
 <br>
 </br>
 <br>

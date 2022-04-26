@@ -26,44 +26,44 @@
 
   <center>
     <div id="Formulario2">
-      <table>
-        <tr height="50px" bgcolor="white">
-          <td width="260px">
-            <div id="r">
-          <p>Reporte de Ventas del</p>
-        </div>
-          </td>
-          <td width="125px">
-              <div id="rk">
+    <table>
+      <tr height="50px" bgcolor="white">
+        <td width="260px">
+          <div id="r">
+           <p>Reporte de Ventas del</p>
+          </div>
+        </td>
+        <td width="125px">
+          <div id="rk">
             <?php echo $_REQUEST['del'] ?>
           </div>
-          </td>
-          <td width="25px">
-            <div id="r">
-          <p>al</p>
-        </div>
-          </td>
-          <td width="130px">
-              <div id="rk">
+        </td>
+        <td width="25px">
+          <div id="r">
+            <p>al</p>
+          </div>
+        </td>
+        <td width="130px">
+          <div id="rk">
             <?php echo $_REQUEST['al'] ?>
           </div>
-          </td>
-          <td width="300px">
-          </td>
-          <td width="10px">
-            <div id="r">
+        </td>
+        <td width="300px">
+        </td>
+        <td width="10px">
+          <div id="r">
             N°
           </div>
-          </td>
-          <td>
-              <div id="r">
-          <?php echo $_REQUEST['numero']?></div>
-          </td>
-        </tr>
-      </table>
-      <table>
-        <tr>
-          <td width="1100px">
+        </td>
+        <td>
+          <div id="r">
+            <?php echo $_REQUEST['numero']?></div>
+        </td>
+      </tr>
+    </table>
+    <table>
+      <tr>
+        <td width="1100px">
             <div id="s">
             Corresponde a la
             <?php echo  $_REQUEST['fnc']?>
@@ -258,7 +258,7 @@
 <style>
 #Formulario2{
      width: 1100px;
-     height: 625px;
+     height: 605px;
      padding: 5px;
      border: 2px solid black;
      background-color: white;
