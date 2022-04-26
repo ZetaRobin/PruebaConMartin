@@ -20,11 +20,22 @@
 <p>
 		<center>
 			<input type="text"  name="numero" id="numero" size="10" maxlength="10" placeholder="Numero Reporte" required />
-			<input type="text"  name="codigo" id="codigo" size="10" maxlength="10" placeholder="Código" required />
-			<input type="text"  name="unidades" id="unidades" size="5" maxlength="5" placeholder="Unidades"  required />
-			<input type="text"  name="costo" id="costo" size="10" maxlength="10" placeholder="Costo unitario en $"   required />
 			<input type="text"  name="dolar" id="dolar" size="10" maxlength="10" placeholder="Dolar promedio"   required />
 			<input type="text"  name="flete" id="flete" size="10" maxlength="10" placeholder="Precio Flete" />
+
+
+			<p class="text-left">
+				<b>Productos:</b>
+			</p>
+			<div id="content_productos">
+				<div class="row">
+					<input type="text"  name="codigo[]" id="codigo" size="10" maxlength="10" placeholder="Código" required />
+					<input type="text"  name="unidades[]" id="unidades" size="5" maxlength="5" placeholder="Unidades"  required />	
+					<input type="text"  name="costo[]" id="costo" size="10" maxlength="10" placeholder="Costo unitario en $"   required />
+
+				</div>
+			</div>
+			
 <br>
 <h4><div id="Formulario1">Fechas del reporte</div></h4>
 <input type="date" name="del" id="del" placeholder="dd/mm/aaaa" required />
@@ -45,13 +56,12 @@ Al
 <br>
 <br>
 <input type="submit" name="Listo" value="Listo">
+<input id="insertar_inputs" type="button" value="Agregar otro Producto">
 		</form>
-		<form action="Tc2.php">
-      <input type="submit" value="Agregar otro Producto">
 		</p>
 		</div>
 	</center>
-</form>
+
 
 </table>
 </center>
@@ -72,7 +82,7 @@ Al
 						}
 	#Formulario2{
      width: 600px;
-     height: 700px;
+     min-height: 700px;
      padding: 5px;
      border: 4px solid #0055BD;
      background-color: white;
@@ -90,6 +100,9 @@ Al
 	 margin: 0px auto;
 	 font-size: 1.2em;
 
+ }
+ .row{
+ 	width: 100%;
  }
  select{
 	 outline: none;
@@ -111,8 +124,12 @@ Al
 	 margin: 0px auto;
 	 font-size: 0.8em;
  }
+
 </style>
 
 	</form>
+
+	<script type="text/javascript" src="./assets/js/crear_inputs.js"></script>
+
 	</body>
 	</html>

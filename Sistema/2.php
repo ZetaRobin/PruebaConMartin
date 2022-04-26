@@ -1,18 +1,37 @@
-
+<pre>
  <?php
+
+    require './buscar_productos.php';
+
+
     $uni= $_GET['unidades'];
+    $cod = $_GET['codigo'];
     $cos= $_GET['costo'];
     $dol= $_GET['dolar'];
-    $tot= $uni * $cos;
-    $subs= $dol * $tot;
+
+    
+    
+    // $tot= $uni * $cos;
+
+    $tot = 0;
+    $subs = 0;
+
+    // $subs= $dol * $tot;
     $iva= $subs * 0.16;
     $totl= $subs + $iva;
     $subs1 = bcdiv($subs, '1', 2);
     $iva1 = bcdiv($iva, '1', 2);
     $totl1 = bcdiv($totl, '1', 2);
     $tot1 = bcdiv($tot, '1', 2);
-		$conexion = mysqli_connect("localhost","root","","sistema");
-		$conexion -> set_charset("utf8");
+		
+    $conexion = mysqli_connect("localhost","root","","sistema");
+    $conexion -> set_charset("utf8");
+
+    $productos = buscar_productos( $cod, $uni, $cos, $conexion );
+
+
+
+
 		?>
 <!DOCTYPE html>
 <html lang="es">
@@ -133,48 +152,46 @@
 </div>
   </tr>
 </thead>
+<tbody height="1px">
   <?php
   if(isset($_GET['Listo'])) {
-     $busqueda = $_GET['codigo'];
-     $registro = mysqli_query($conexion,"SELECT * from productos");
-    while ($result=mysqli_fetch_array($registro))
-     $consulta = $conexion->query("SELECT * FROM productos WHERE codigo LIKE '%$busqueda%'");
-     while ($row = $consulta->fetch_array()){
+    foreach ($productos as $index => $producto ):
   ?>
-<tbody height="1px">
   <tr height="10px" bgcolor="white">
   <td>
     <center>
-		<?php echo $row['codigo']?>
+		<?php echo $producto['codigo']?>
 </center>
   </td>
   <td>
-	&nbsp;<?php echo $row['descripcion']?>
+	&nbsp;<?php echo $producto['descripcion']?>
 	</td>
   <td>
-		&nbsp;<?php echo $row['color']?>
+		&nbsp;<?php echo $producto['color']?>
 	</td>
 
   <td>
   <div id="lol">
-		<?php echo $row['medida']?>
+		<?php echo $producto['medida']?>
   <div>
 </td>
   <td>
     <div id="lol">
-    <?php echo $_REQUEST['unidades']?>
+    <?php echo $producto['unidades']?>
 </div>
   </td>
   <td>
     <div id="lol">
-  <?php echo $_REQUEST['costo']?>
+  <?php echo $producto['costo']?>
 </div>
   </td>
   <td>
     <div id="lol">
-    <?php echo $tot1;?>
+    <?php echo $producto['subtotal'] ?>
   </div>
 </td>
+</tr>
+<?php endforeach; ?>
 <tr bgcolor="white">
 <td id="rt" scope="row" colspan="3" height="1px">
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dólar promedio
@@ -184,7 +201,7 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Total
 <br>
 &nbsp;&nbsp;&nbsp;Cantidad
-&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $uni; ?>
+&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $producto['subtotal']; ?>
 </td>
 <th rowspan="3" colspan="2" >
   <div id="losk">
@@ -249,8 +266,6 @@
 </div>
 </center>
 <?php
-     }
-
 }
    ?>
 </table></center>
