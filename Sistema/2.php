@@ -2,7 +2,15 @@
  <?php
     $uni= $_GET['unidades'];
     $cos= $_GET['costo'];
+    $dol= $_GET['dolar'];
     $tot= $uni * $cos;
+    $subs= $dol * $tot;
+    $iva= $subs * 0.16;
+    $totl= $subs + $iva;
+    $subs1 = bcdiv($subs, '1', 2);
+    $iva1 = bcdiv($iva, '1', 2);
+    $totl1 = bcdiv($totl, '1', 2);
+    $tot1 = bcdiv($tot, '1', 2);
 		$conexion = mysqli_connect("localhost","root","","sistema");
 		$conexion -> set_charset("utf8");
 		?>
@@ -25,18 +33,22 @@
           <p>Reporte de Ventas del</p>
         </div>
           </td>
-          <td width="100px">
-            <input type="date">
+          <td width="125px">
+              <div id="rk">
+            <?php echo $_REQUEST['del'] ?>
+          </div>
           </td>
-          <td width="20px">
+          <td width="25px">
             <div id="r">
           <p>al</p>
         </div>
           </td>
-          <td width="100px">
-            <input type="date">
+          <td width="130px">
+              <div id="rk">
+            <?php echo $_REQUEST['al'] ?>
+          </div>
           </td>
-          <td width="250px">
+          <td width="300px">
           </td>
           <td width="10px">
             <div id="r">
@@ -51,15 +63,12 @@
       </table>
       <table>
         <tr>
-          <td width="500px">
-          </td>
-          <td >
+          <td width="1100px">
             <div id="s">
-            Corresponde a la Consignacion al
-          </div>
-          </td>
-          <td>
-              <input type="date" id="sa">
+            Corresponde a la
+            <?php echo  $_REQUEST['fnc']?>
+            <?php echo  $_REQUEST['ne']?>
+            <?php echo  $_REQUEST['n']?>
             </div>
           </td>
         </tr>
@@ -163,7 +172,7 @@
   </td>
   <td>
     <div id="lol">
-    <?php echo $tot;?>
+    <?php echo $tot1;?>
   </div>
 </td>
 <tr bgcolor="white">
@@ -178,39 +187,62 @@
 &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $uni; ?>
 </td>
 <th rowspan="3" colspan="2" >
+  <div id="losk">
   &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
   &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sub-Total $
 &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $tot; ?>
+&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;<?php echo $tot1; ?>
   &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
   &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
 &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
 &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
 &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
+</div>
 <p id="loss">Descuento 5% ya aplicado<p>
 </th>
 </tr>
+<tr bgcolor="white" background-color="white" height="30px">
+<td colspan="3" rowspan="4">
+    <center>
+    <div id="gras">
+    Flete $
+    <br>
+   <br>
+    <?php echo $_REQUEST['flete']?>
+  </div>
+  </td>
+</tr>
+<tr height="35px" bgcolor="white">
+<td rowspan="3" colspan="2">
+  <div id="losk">
+   &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;Sub-Total Bs.
+   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $subs1;?>
+  <br>
+  <br>
+  <br>
+  &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;IVA 16%&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
+  <?php echo $iva1;?>
+  <br>
+  <hr>
+  &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;<b>Total Bs&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+  <?php echo $totl1;?></b>
+  <br>
+</div>
+</td>
+</tr>
 <tr bgcolor="white" height="30px">
-<td>
-</td>
+<th rowspan="2" colspan="2" height="40px">
+<div id="losk">
+  Total $&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <?php echo $tot1;?>
+</div>
+</th>
 </tr>
-</tr>
-<tr height="35px">
-<td>
-  xd
-</td>
-</tr>
-<tr bgcolor="white" height="30px">
-<td>
-</td>
-</tr>
-<tr bgcolor="white" height="30px">
-<td>
-</td>
+<tr bgcolor="white" height="50px">
 </tr>
 </tbody>
 </table>
@@ -226,7 +258,7 @@
 <style>
 #Formulario2{
      width: 1100px;
-     height: 600px;
+     height: 625px;
      padding: 5px;
      border: 2px solid black;
      background-color: white;
@@ -255,6 +287,10 @@
       font-size: 1.2em;
       color: red;
       }
+      #losk{
+        font-size: 1.2em;
+        color: black;
+        }
     #rt{
       color: blue;
       font-size: 1.7em;
@@ -274,6 +310,18 @@
       color: black;
       font-size: 1.2em;
       text-align: center;
+    }
+    #gras{
+      color: green;
+      font-size: 2.3em;
+    }
+    #rk{
+      color: blue;
+      font-size: 1.9em;
+    }
+    #r{
+      color: blue;
+      font-size: 2em;
     }
 </style>
 </body>

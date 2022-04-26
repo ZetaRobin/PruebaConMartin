@@ -51,11 +51,11 @@
           </td>
           <td >
             <div id="s">
-            Corresponde a la Consignacion al
+            Corresponde a la
           </div>
           </td>
           <td>
-              <input type="date" id="sa">
+              gg
             </div>
           </td>
         </tr>
